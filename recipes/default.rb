@@ -1,7 +1,6 @@
 #
 # Cookbook Name:: rubygems_app
 # Recipe:: default
-#
 # Copyright 2014, YOUR_COMPANY_NAME
 #
 # All rights reserved - Do Not Redistribute
@@ -23,3 +22,8 @@ application 'my-app' do
     worker_processes 2
   end
 end
+# Copyright (C) 2014 Erich Kaderka
+#
+# All rights reserved - Do Not Redistribute
+#
+

@@ -1,13 +1,9 @@
-rubygems_app CHANGELOG
-======================
+# 0.1.0
 
-This file is used to list changes made in each version of the rubygems_app cookbook.
+Initial release of rubygems_app
 
-0.1.0
------
-- [your_name] - Initial release of rubygems_app
+* Enhancements
+  * an enhancement
 
-- - -
-Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
-
-The [Github Flavored Markdown page](http://github.github.com/github-flavored-markdown/) describes the differences between markdown on github and standard markdown.
+* Bug Fixes
+  * a bug fix
