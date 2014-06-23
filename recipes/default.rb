@@ -18,8 +18,8 @@ application 'my-app' do
   revision 'master'
 
   unicorn do
-    port 8000
-    worker_processes 2
+    port '8000'
+    worker_processes '2'
   end
 end
 # Copyright (C) 2014 Erich Kaderka
