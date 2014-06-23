@@ -19,7 +19,7 @@ application 'my-app' do
 
   unicorn do
     port '8000'
-    worker_processes '2'
+    worker_processes 2
   end
 end
 # Copyright (C) 2014 Erich Kaderka
