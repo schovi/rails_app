@@ -16,16 +16,23 @@ package 'git' do
   action :install
 end
 
+node['rvm']['user_installs'] = [
+  { 'user'          => 'rubygems_app',
+    'default_ruby'  => '2.0.0',
+    'rubies'        => ['2.0.0']
+  }
+]
+
 application 'my-app' do
   path '/home/rubygems_app'
   repository 'https://github.com/rubygems/rubygems.org.git'
   revision 'master'
-
-  unicorn do
-    port '8000'
-    worker_processes 2
-  end
 end
+
+#unicorn
+
+
+
 # Copyright (C) 2014 Erich Kaderka
 #
 # All rights reserved - Do Not Redistribute

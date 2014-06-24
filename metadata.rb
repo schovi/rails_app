@@ -8,3 +8,4 @@ version          '0.1.0'
 
 depends 'user'
 depends 'application_ruby'
+depends 'rvm'

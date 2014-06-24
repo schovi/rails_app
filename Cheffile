@@ -7,12 +7,12 @@ site 'http://community.opscode.com/api/v1'
 
 # cookbook 'apache2', '>= 1.0.0'
 
-# cookbook 'rvm',
-#   :git => 'https://github.com/fnichol/chef-rvm'
-
 # cookbook 'postgresql',
 #   :git => 'https://github.com/findsyou/cookbooks',
 #   :ref => 'postgresql-improvements'
+#
 cookbook 'user'
 cookbook 'application_ruby', :git => 'https://github.com/erich/application_ruby.git'
 cookbook 'git'
+cookbook 'rvm',:git => 'https://github.com/fnichol/chef-rvm'
+
