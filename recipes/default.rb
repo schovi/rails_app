@@ -9,8 +9,8 @@
 
 include_recipe "nginx"
 
-node['default']['app_name'] = 'rubygems_app'
-node['default']['domain'] = "#{node['default']['app_name']}.com"
+node.default['app_name'] = 'rubygems_app'
+node.default['domain'] = "#{node['default']['app_name']}.com"
 
 user_account node['default']['app_name'] do
   action :create
