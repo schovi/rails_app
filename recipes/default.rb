@@ -35,9 +35,9 @@ node.default[:unicorn][:before_fork] = 'sleep 1'
 node.default[:unicorn][:port] = '8080'
 node.set[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 
-unicorn_config "/etc/unicorn/#{app['id']}.rb" do
+unicorn_config "/etc/unicorn/#{node['rubygems']['name']}.rb" do
   listen({ node[:unicorn][:port] => node[:unicorn][:options] })
-  working_directory ::File.join(app['deploy_to'], 'current')
+  working_directory ::File.join(node['rubygems_app']['name'], 'current')
   worker_timeout node[:unicorn][:worker_timeout]
   preload_app node[:unicorn][:preload_app]
   worker_processes node[:unicorn][:worker_processes]
