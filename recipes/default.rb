@@ -16,7 +16,7 @@ package 'git' do
   action :install
 end
 
-node['rvm']['user_installs'] = [
+node['default']['rvm']['user_installs'] = [
   { 'user'          => 'rubygems_app',
     'default_ruby'  => '2.0.0',
     'rubies'        => ['2.0.0']
