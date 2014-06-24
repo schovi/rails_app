@@ -7,6 +7,7 @@
 #
 #
 
+include_recipe "rvm::user_install"
 
 user_account 'rubygems_app' do
   action :create
@@ -16,7 +17,7 @@ package 'git' do
   action :install
 end
 
-node['default']['rvm']['user_installs'] = [
+node.default['rvm']['user_installs'] = [
   { 'user'          => 'rubygems_app',
     'default_ruby'  => '2.0.0',
     'rubies'        => ['2.0.0']
