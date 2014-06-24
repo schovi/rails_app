@@ -14,7 +14,7 @@ user_account node['rubygems_app']['name'] do
   action :create
 end
 
-package 'git' do 
+package 'git' do
   action :install
 end
 
@@ -35,7 +35,7 @@ node.default[:unicorn][:before_fork] = 'sleep 1'
 node.default[:unicorn][:port] = '8080'
 node.set[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 
-unicorn_config "/etc/unicorn/#{node['rubygems']['name']}.rb" do
+unicorn_config "/etc/unicorn/rubygems_app.rb" do
   listen({ node[:unicorn][:port] => node[:unicorn][:options] })
   working_directory ::File.join(node['rubygems_app']['name'], 'current')
   worker_timeout node[:unicorn][:worker_timeout]
@@ -46,7 +46,7 @@ end
 
 #nginx -> it should have its own cookbook
 
-cookbook_file "#{node['nginx']['dir']}/sites-available/#{node['rubygems_app']['domain']}" do
+file "#{node['nginx']['dir']}/sites-available/#{node['rubygems_app']['domain']}" do
   owner node['rubygems_app']['name']
   mode  "0644"
 end
@@ -56,13 +56,13 @@ template "/etc/nginx/sites-available/#{node['rubygems_app']['domain']}" do
     mode 644
     variables(
       :application_name => node['rubygems_app']['domain'],
-      :default => default,
-      :unicorn_port => node['default']['unicorn']['port']
+      :default => 'default',
+      :unicorn_port => node['unicorn']['port']
     )
   end
 
 # enable your sites configuration using a definition from the nginx cookbook
-nginx_site node['default']['domain'] do
+nginx_site node['rubygems_app']['domain'] do
   enable true
 end
 
@@ -72,4 +72,3 @@ end
 #
 # All rights reserved - Do Not Redistribute
 #
-
