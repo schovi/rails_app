@@ -9,10 +9,8 @@
 
 include_recipe "nginx"
 
-node.default['app_name'] = 'rubygems_app'
-node.default['domain'] = 'rubygems_app.com'
 
-user_account node['default']['app_name'] do
+user_account node['rubygems_app']['name'] do
   action :create
 end
 
@@ -21,7 +19,7 @@ package 'git' do
 end
 
 
-application node['default']['app_name'] do
+application node['rubygems_app']['name'] do
   path '/home/rubygems_app'
   repository 'https://github.com/rubygems/rubygems.org.git'
   revision 'master'
@@ -48,16 +46,16 @@ end
 
 #nginx -> it should have its own cookbook
 
-cookbook_file "#{node['nginx']['dir']}/sites-available/#{node['default']['domain']}" do
-  owner node['default']['app_name']
+cookbook_file "#{node['nginx']['dir']}/sites-available/#{node['rubygems_app']['domain']}" do
+  owner node['rubygems_app']['name']
   mode  "0644"
 end
 
-template "/etc/nginx/sites-available/#{node['default']['domain']}" do
+template "/etc/nginx/sites-available/#{node['rubygems_app']['domain']}" do
     source "nginx_site.erb"
     mode 644
     variables(
-      :application_name => node['default']['domain'],
+      :application_name => node['rubygems_app']['domain'],
       :default => default,
       :unicorn_port => node['default']['unicorn']['port']
     )
