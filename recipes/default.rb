@@ -12,6 +12,10 @@ user_account 'rubygems_app' do
   action :create
 end
 
+package 'git' do 
+  action :install
+end
+
 application 'my-app' do
   path '/home/rubygems_app'
   repository 'https://github.com/rubygems/rubygems.org.git'
