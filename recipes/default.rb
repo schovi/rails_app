@@ -46,13 +46,22 @@ unicorn_config "/etc/unicorn/#{app['id']}.rb" do
   before_fork node[:unicorn][:before_fork]
 end
 
-#nginx
+#nginx -> it should have its own cookbook
 
 cookbook_file "#{node['nginx']['dir']}/sites-available/#{node['default']['domain']}" do
-  owner "root"
-  group "root"
+  owner node['default']['app_name']
   mode  "0644"
 end
+
+template "/etc/nginx/sites-available/#{node['default']['domain']}" do
+    source "nginx_site.erb"
+    mode 644
+    variables(
+      :application_name => node['default']['domain'],
+      :default => default,
+      :unicorn_port => node['default']['unicorn']['port']
+    )
+  end
 
 # enable your sites configuration using a definition from the nginx cookbook
 nginx_site node['default']['domain'] do
