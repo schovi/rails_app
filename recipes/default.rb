@@ -27,14 +27,20 @@ end
 
 #add rvm bashrc config line
 rvm_line = '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"'
-
 ruby_block "add rvm basrhc config line" do
   block do
     #NOTE move this to attributes
-    file = Chef::Util::FileEdit.new("#{['node']['rubygems_app']['application_path']}/.bashrc")
+    file = Chef::Util::FileEdit.new("#{['node']['rubygems_app']['basrhc']}")
     file.insert_line_if_no_match(rvm_line, rvm_line)
     file.write_file
   end
+end
+
+ruby_block "reload .bashrc" do
+  block do
+    Chef::Config.from_file("#{['node']['rubygems_app']['basrhc']}")
+  end
+  action :nothing
 end
 
 execute "cd to app directory, run bundle install and restart unicorn" do
