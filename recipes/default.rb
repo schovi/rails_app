@@ -56,7 +56,7 @@ template "/etc/nginx/sites-available/#{node['rubygems_app']['domain']}" do
     mode 644
     variables(
       :application_name => node['rubygems_app']['domain'],
-      :default => 'default',
+      :application_path => node['rubygems_app']['application_path'],
       :unicorn_port => node['unicorn']['port']
     )
   end

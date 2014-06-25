@@ -3,12 +3,12 @@ upstream <%= @application_name %>_server {
 }
 
 server {
-  listen 80 <%= @default ? "default" : "" %>;
-  server_name <%= @default ? "_" : @application_name %>;
+  listen 80; 
+  server_name <%= @application_name %>;
 
   client_max_body_size 4G;
   keepalive_timeout 5;
-  root /var/www/apps/<%= @application_name %>/current/public;
+  root <%= @application_path %>/current/public;
   try_files $uri/index.html $uri.html $uri @app;
 
   location @app {
@@ -20,6 +20,6 @@ server {
 
   error_page 500 502 503 504 /500.html;
   location = /500.html {
-    root /var/www/apps/sample/current/public;
+  root <%= @application_path %>/current/public;
   }
 }
