@@ -88,10 +88,6 @@ unicorn_config "/etc/unicorn/rubygems_app.rb" do
   before_fork node[:unicorn][:before_fork]
 end
 
-gem_package "unicorn" do
-  action :install
-end
-
 file "#{node['nginx']['dir']}/sites-available/#{node['domain']}" do
   owner node['name']
   mode  "0644"
