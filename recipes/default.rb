@@ -20,12 +20,30 @@ end
 
 
 application node['rubygems_app']['name'] do
-  path node['node']['rubygems_app']['application_path']
+  path ['node']['rubygems_app']['application_path']
   repository 'https://github.com/erich/simple-rails.git'
   revision 'master'
 end
 
-unicorn_config "/etc/unicorn/rubygems_app.rb" do
+#add rvm bashrc config line
+rvm_line = '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"'
+
+ruby_block "add rvm basrhc config line" do
+  block do
+    #NOTE move this to attributes
+    file = Chef::Util::FileEdit.new("#{['node']['rubygems_app']['application_path']}/.bashrc")
+    file.insert_line_if_no_match(rvm_line, rvm_line)
+    file.write_file
+  end
+end
+
+execute "cd to app directory, run bundle install and restart unicorn" do
+  user ['node']['rubygems_app']
+  #NOTE split to mulitple lines maybe 2 execute
+  command "cd #{['node']['rubygems_app']['application_path']} && bundle install && bundle exec unicorn -c #{['node']['unicorn']['config_file']}"
+end
+
+unicorn_config "#{['node']['unicorn']['config_file']}" do
   listen({ node[:unicorn][:port] => node[:unicorn][:options] })
   working_directory ::File.join(node['rubygems_app']['name'], 'current')
   worker_timeout node[:unicorn][:worker_timeout]
