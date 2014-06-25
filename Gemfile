@@ -5,6 +5,7 @@ gem 'librarian-chef'
 gem 'chefspec'
 gem 'json', '1.8.1'
 gem 'strainer'
+gem 'foodcritic'
 
 # Uncomment these lines if you want to live on the Edge:
 #
