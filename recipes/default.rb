@@ -23,13 +23,14 @@ package 'tmux' do
   action :install
 end
 
-#Should fix Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable) on Debian - starting rails app
-
+#Fix Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable) on Debian - starting rails app
 package 'libv8-dev' do
   action :install
 end
 
 application node['name'] do
+  owner 'rubygems_app'
+  group 'rubygems_app'
   path '/home/rubygems_app'
   repository 'https://github.com/erich/simple-rails.git'
   revision 'master'
@@ -57,11 +58,12 @@ ruby_block "add rvm basrhc config line" do
   end
 end
 
-ruby_block "reload .bashrc" do
-  block do
-    Chef::Config.from_file("/home/rubygems_app/.bashrc")
-  end
-end
+#NOTE it raises weird debian syntax error on line 6
+#ruby_block "reload .bashrc" do
+#  block do
+#    Chef::Config.from_file("/home/rubygems_app/.bashrc")
+#  end
+#end
 
 
 unicorn_config "/etc/unicorn/rubygems_app.rb" do
