@@ -22,6 +22,7 @@ rvm_shell "bundle" do
   EOF
 end
 
+
 #add rvm bashrc config line
 rvm_line = '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"'
 ruby_block "add rvm basrhc config line" do
@@ -49,6 +50,19 @@ unicorn_config "/etc/unicorn/rubygems_app.rb" do
   worker_processes node[:unicorn][:worker_processes]
   before_fork node[:unicorn][:before_fork]
 end
+
+rvm_shell "start unicorn" do
+  ruby_string 'ruby-2.0.0@rubygems_app'
+  user        "rubygems_app"
+  group       "rubygems_app"
+  cwd         "/home/rubygems_app/current"
+  #path        "home/rubygems_app/.rvm/gems/ruby-2.0.0-rc1@rubygems_app:/home/rubygems_app/.rvm/gems/ruby-2.0.0-rc1@global"
+  #NOTE add path to config file with unicorn pid
+  code        <<-EOF
+    unicorn -D
+  EOF
+end
+
 
 file "#{node['nginx']['dir']}/sites-available/#{node['domain']}" do
   owner node['name']
