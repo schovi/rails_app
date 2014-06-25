@@ -28,6 +28,12 @@ package 'libv8-dev' do
   action :install
 end
 
+#Install development headers for mysql required by mysql2 gem
+
+package 'libmysqlclient-dev' do
+  action :install
+end
+
 application node['name'] do
   owner 'rubygems_app'
   group 'rubygems_app'
