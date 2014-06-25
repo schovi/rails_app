@@ -20,20 +20,10 @@ end
 
 
 application node['rubygems_app']['name'] do
-  path '/home/rubygems_app'
+  path node['node']['rubygems_app']['application_path']
   repository 'https://github.com/erich/simple-rails.git'
   revision 'master'
 end
-
-#unicorn
-
-node.default[:unicorn][:worker_timeout] = 60
-node.default[:unicorn][:preload_app] = false
-node.default[:unicorn][:worker_processes] = [node[:cpu][:total].to_i * 4, 8].min
-node.default[:unicorn][:preload_app] = false
-node.default[:unicorn][:before_fork] = 'sleep 1'
-node.default[:unicorn][:port] = '8080'
-node.set[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 
 unicorn_config "/etc/unicorn/rubygems_app.rb" do
   listen({ node[:unicorn][:port] => node[:unicorn][:options] })
