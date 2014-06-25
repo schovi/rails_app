@@ -21,7 +21,7 @@ end
 
 application node['rubygems_app']['name'] do
   path '/home/rubygems_app'
-  repository 'https://github.com/rubygems/rubygems.org.git'
+  repository 'https://github.com/erich/simple-rails.git'
   revision 'master'
 end
 
