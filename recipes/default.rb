@@ -18,6 +18,16 @@ package 'git' do
   action :install
 end
 
+#it helps with debugging
+package 'tmux' do
+  action :install
+end
+
+#Should fix Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable) on Debian - starting rails app
+
+package 'libv8-dev' do
+  action :install
+end
 
 application node['name'] do
   path '/home/rubygems_app'
