@@ -34,6 +34,13 @@ application node['name'] do
   path '/home/rubygems_app'
   repository 'https://github.com/erich/simple-rails.git'
   revision 'master'
+  rails do
+    database do
+      database "rubygems_app_production"
+      username "rubygems_app"
+      password "12*asda!BanqV"
+    end
+  end
 end
 
 rvm_shell "bundle" do
