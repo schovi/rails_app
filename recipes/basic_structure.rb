@@ -1,4 +1,4 @@
-user_account node['name'] do
+user_account node['rubygems_app']['name'] do
   action :create
 end
 
@@ -17,15 +17,14 @@ package 'libv8-dev' do
 end
 
 #Install development headers for mysql required by mysql2 gem
-
 package 'libmysqlclient-dev' do
   action :install
 end
 
-application node['name'] do
-  owner 'rubygems_app'
-  group 'rubygems_app'
-  path '/home/rubygems_app'
+application node['rubygems_app']['name'] do
+  owner node['rubygems_app']['name']
+  group node['rubygems_app']['name']
+  path node['rubygems_app']['name']
   repository 'https://github.com/erich/simple-rails.git'
   revision 'master'
   rails do

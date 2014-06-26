@@ -1,8 +1,8 @@
 #name of the app, domain and path
-default['name'] = 'rubygems_app'
-default['domain'] = 'rubygems_app.com'
-default['application_path'] =  '/home/rubygems_app'
-default['bashrc'] = "#{default['rubygems_app']['application_path']}/.bashrc"
+default['rubygems_app']['name'] = 'rubygems_app'
+default['rubygems_app']['domain'] = 'rubygems_app.com'
+default['rubygems_app']['application_path'] =  '/home/rubygems_app'
+default['rubygems_app']['bashrc'] = "#{default['rubygems_app']['application_path']}/.bashrc"
 
 
 #unicorn configuration, port, worker processes

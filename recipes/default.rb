@@ -41,7 +41,7 @@ end
 #  end
 #end
 
-
+#NOTE add unicorn pid and error log
 unicorn_config "/etc/unicorn/rubygems_app.rb" do
   listen({ node[:unicorn][:port] => node[:unicorn][:options] })
   working_directory ::File.join(node['name'], 'current')
