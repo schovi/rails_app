@@ -64,12 +64,12 @@ rvm_shell "start unicorn" do
 end
 
 
-file "#{node['nginx']['dir']}/sites-available/#{node['rubygems']['domain']}" do
+file "#{node['nginx']['dir']}/sites-available/#{node['rubygems_app']['domain']}" do
   owner node['name']
   mode  "0644"
 end
 
-template "/etc/nginx/sites-available/#{node['rubygems']['domain']}" do
+template "/etc/nginx/sites-available/#{node['rubygems_app']['domain']}" do
     source "nginx_site.erb"
     mode 644
     variables(
