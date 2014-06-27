@@ -29,10 +29,11 @@ application node['rails_app']['name'] do
   repository node['rails_app']['git_repository']
   revision 'master'
   rails do
+    #NOTE it should take attributes, not hardcoded strings
     database do
-      database node['rails_app']['database_name']
-      username node['rails_app']['name']
-      password node['rails_app']['database_password']
+      database 'rails_app'
+      username 'rails_app'
+      password '12*!asBUApg#'
     end
   end
 end
