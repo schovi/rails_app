@@ -1,10 +1,10 @@
 #name of the app, domain and path
 default['rubygems_app']['name'] = 'rubygems_app'
 default['rubygems_app']['domain'] = 'rubygems_app.com'
-default['rubygems_app']['application_path'] =  '/home/rubygems_app'
+default['rubygems_app']['application_path'] =  "/home/#{default['rubygems_app']['name']}"
 default['rubygems_app']['git_repository'] = 'https://github.com/erich/simple-rails.git'
 default['rubygems_app']['bashrc'] = "#{default['rubygems_app']['application_path']}/.bashrc"
-default['rubygems_app']['ruby_rvm_version'] = 'ruby-2.0.0@rubygems_app'
+default['rubygems_app']['ruby_rvm_version'] = "ruby-2.0.0@#{default['rubygems_app']['name']}"
 
 
 #unicorn configuration, port, worker processes
