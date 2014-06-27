@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe 'rubygems_app::default' do
+describe 'rails_app::default' do
   let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
 
   it 'installs user' do
@@ -8,11 +8,11 @@ describe 'rubygems_app::default' do
   end
 
   it 'creates user' do
-    expect(chef_run).to create_user('rubygems_app')
+    expect(chef_run).to create_user('rails_app')
   end
 
   it 'creates app directory' do
-    expect(chef_run).to create_directory('/home/rubygems_app')
+    expect(chef_run).to create_directory('/home/rails_app')
   end
 
 end

@@ -1,4 +1,4 @@
-user_account node['rubygems_app']['name'] do
+user_account node['rails_app']['name'] do
   action :create
 end
 
@@ -22,17 +22,17 @@ package 'libmysqlclient-dev' do
   action :install
 end
 
-application node['rubygems_app']['name'] do
-  owner node['rubygems_app']['name']
-  group node['rubygems_app']['name']
-  path node['rubygems_app']['application_path']
-  repository node['rubygems_app']['git_repository']
+application node['rails_app']['name'] do
+  owner node['rails_app']['name']
+  group node['rails_app']['name']
+  path node['rails_app']['application_path']
+  repository node['rails_app']['git_repository']
   revision 'master'
   rails do
     database do
-      database node['rubygems_app']['database_name']
-      username node['rubygems_app']['name']
-      password node['rubygems_app']['database_password']
+      database node['rails_app']['database_name']
+      username node['rails_app']['name']
+      password node['rails_app']['database_password']
     end
   end
 end

@@ -1,6 +1,6 @@
 # 0.1.0
 
-Initial release of rubygems_app
+Initial release of rails_app
 
 * Enhancements
   * an enhancement

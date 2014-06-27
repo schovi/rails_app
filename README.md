@@ -1,26 +1,26 @@
 Usage
 -----
-#### rubygems_app::default
+#### rails_app::default
 TODO: Write usage instructions for each cookbook.
 
 e.g.
-Just include `rubygems_app` in your node's `run_list`:
+Just include `rails_app` in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[rubygems_app]"
+    "recipe[rails_app]"
 ## Usage
 
-### rubygems_app::default
+### rails_app::default
 
-Include `rubygems_app` in your node's `run_list`:
+Include `rails_app` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[rubygems_app::default]"
+    "recipe[rails_app::default]"
   ]
 }
 ```
