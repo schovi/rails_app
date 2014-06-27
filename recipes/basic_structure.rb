@@ -7,6 +7,7 @@ package 'git' do
 end
 
 #it helps with debugging
+#NOTE add tmux config with key set to C-A
 package 'tmux' do
   action :install
 end
