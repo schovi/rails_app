@@ -28,7 +28,7 @@ rvm_line = '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 ruby_block "add rvm basrhc config line" do
   block do
     #NOTE move this to attributes
-    file = Chef::Util::FileEdit.new("/home/rubygems_app/.bashrc")
+    file = Chef::Util::FileEdit.new("/home/#{node['rubygems_app']['name']}/.bashrc")
     file.insert_line_if_no_match(rvm_line, rvm_line)
     file.write_file
   end
