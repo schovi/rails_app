@@ -30,9 +30,9 @@ application node['rubygems_app']['name'] do
   revision 'master'
   rails do
     database do
-      database "rubygems_app_production"
-      username "rubygems_app"
-      password "12*asda!BanqV"
+      database node['rubygems_app']['database_name']
+      username node['rubygems_app']['name']
+      password node['rubygems_app']['database_password']
     end
   end
 end
