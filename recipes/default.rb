@@ -12,10 +12,10 @@ include_recipe "nginx"
 
 
 rvm_shell "bundle" do
-  ruby_string 'ruby-2.0.0@rubygems_app'
-  user        "rubygems_app"
-  group       "rubygems_app"
-  cwd         "/home/rubygems_app/current"
+  ruby_string node['rubygems_app']['ruby_rvm_version']
+  user        node['rubygems_app']['name']
+  group       node['rubygems_app']['name']
+  cwd         "#{node['rubygems_app']['application_path']}/current"
   #path        "home/rubygems_app/.rvm/gems/ruby-2.0.0-rc1@rubygems_app:/home/rubygems_app/.rvm/gems/ruby-2.0.0-rc1@global"
   code        <<-EOF
     bundle install #--path .bundle
@@ -23,7 +23,7 @@ rvm_shell "bundle" do
 end
 
 
-#add rvm bashrc config line
+#NOTE maybe not needed, add rvm bashrc config line
 rvm_line = '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"'
 ruby_block "add rvm basrhc config line" do
   block do
@@ -43,19 +43,19 @@ end
 
 #NOTE add unicorn pid and error log
 unicorn_config "/etc/unicorn/rubygems_app.rb" do
-  listen({ node[:unicorn][:port] => node[:unicorn][:options] })
-  working_directory ::File.join(node['name'], 'current')
-  worker_timeout node[:unicorn][:worker_timeout]
-  preload_app node[:unicorn][:preload_app]
-  worker_processes node[:unicorn][:worker_processes]
-  before_fork node[:unicorn][:before_fork]
+  listen({ node['unicorn']['port'] => node['unicorn']['options'] })
+  working_directory ::File.join(node['rubygems_app']['name'], 'current')
+  worker_timeout node['unicorn']['worker_timeout']
+  preload_app node['unicorn']['preload_app']
+  worker_processes node['unicorn']['worker_processes']
+  before_fork node['unicorn']['before_fork']
 end
 
 rvm_shell "start unicorn" do
-  ruby_string 'ruby-2.0.0@rubygems_app'
-  user        "rubygems_app"
-  group       "rubygems_app"
-  cwd         "/home/rubygems_app/current"
+  ruby_string node['rubygems_app']['ruby_rvm_version']
+  user        node['rubygems_app']['name']
+  group       node['rubygems_app']['name']
+  cwd         "#{node['rubygems_app']['application_path']}/current"
   #path        "home/rubygems_app/.rvm/gems/ruby-2.0.0-rc1@rubygems_app:/home/rubygems_app/.rvm/gems/ruby-2.0.0-rc1@global"
   #NOTE add path to config file with unicorn pid
   code        <<-EOF
@@ -73,14 +73,14 @@ template "/etc/nginx/sites-available/#{node['domain']}" do
     source "nginx_site.erb"
     mode 644
     variables(
-      :application_name => node['domain'],
-      :application_path => node['application_path'],
+      :application_name => node['rubygems_app']['domain'],
+      :application_path => node['rubygems_app']['application_path'],
       :unicorn_port => node['unicorn']['port']
     )
   end
 
 # enable your sites configuration using a definition from the nginx cookbook
-nginx_site node['domain'] do
+nginx_site node['rubygems_app']['domain'] do
   enable true
 end
 

@@ -24,8 +24,8 @@ end
 application node['rubygems_app']['name'] do
   owner node['rubygems_app']['name']
   group node['rubygems_app']['name']
-  path node['rubygems_app']['name']
-  repository 'https://github.com/erich/simple-rails.git'
+  path node['rubygems_app']['application_path']
+  repository node['rubygems_app']['git_repository']
   revision 'master'
   rails do
     database do
