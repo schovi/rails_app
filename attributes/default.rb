@@ -7,6 +7,7 @@ default['rails_app']['bashrc'] = "#{default['rails_app']['application_path']}/.b
 default['rails_app']['database_name'] = 'rails_app'
 default['rails_app']['database_password'] = 'rails_app'
 default['rails_app']['ruby_rvm_version'] = "ruby-2.0.0@#{default['rails_app']['name']}"
+default['rails_app']['unicorn_pid'] = "/tmp/#{default['rails_app']['name']}.pid"
 
 
 #unicorn configuration, port, worker processes

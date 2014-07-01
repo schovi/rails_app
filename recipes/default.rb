@@ -42,15 +42,15 @@ end
 #end
 
 #NOTE add unicorn pid and error log
+#NOTE dynamic attribute instead of hardcoded string
 unicorn_config "/etc/unicorn/rails_app.rb" do
-  node['unicorn']['ports'].each do |port| 
-    listen({ port => node['unicorn']['options'] })
-  end
+  listen({ node['unicorn']['ports'] => node['unicorn']['options'] })
   working_directory ::File.join(node['rails_app']['name'], 'current')
   worker_timeout node['unicorn']['worker_timeout']
   preload_app node['unicorn']['preload_app']
   worker_processes node['unicorn']['worker_processes']
   before_fork node['unicorn']['before_fork']
+  pid node['rails_app']['unicorn_pid']
 end
 
 rvm_shell "start unicorn" do
@@ -61,7 +61,7 @@ rvm_shell "start unicorn" do
   #path        "home/rails_app/.rvm/gems/ruby-2.0.0-rc1@rails_app:/home/rails_app/.rvm/gems/ruby-2.0.0-rc1@global"
   #NOTE add path to config file with unicorn pid
   code        <<-EOF
-    unicorn -D
+    unicorn -D "/etc/#{node['rails_app']['name']}.rb"
   EOF
 end
 
