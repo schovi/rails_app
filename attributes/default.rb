@@ -16,5 +16,5 @@ default['unicorn']['preload_app'] = false
 default['unicorn']['worker_processes'] = [node['cpu']['total'].to_i * 4, 8].min
 default['unicorn']['preload_app'] = false
 default['unicorn']['before_fork'] = 'sleep 1'
-default['unicorn']['port'] = '8080'
+default['unicorn']['ports'] = ['8080', '8081', '8082']
 default['unicorn']['options'] = { :tcp_nodelay => true, :backlog => 100 }

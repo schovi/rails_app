@@ -1,5 +1,7 @@
 upstream <%= @application_name %>_server {
-  server 127.0.0.1:<%= @unicorn_port %> fail_timeout=0;
+  <% @unicorn_ports.each do |unicorn_port| %>
+    server 127.0.0.1:<%= @unicorn_port %> fail_timeout=0;
+  <% end %>
 }
 
 server {

@@ -43,7 +43,9 @@ end
 
 #NOTE add unicorn pid and error log
 unicorn_config "/etc/unicorn/rails_app.rb" do
-  listen({ node['unicorn']['port'] => node['unicorn']['options'] })
+  node['unicorn']['ports'].each do |port| 
+    listen({ port => node['unicorn']['options'] })
+  end
   working_directory ::File.join(node['rails_app']['name'], 'current')
   worker_timeout node['unicorn']['worker_timeout']
   preload_app node['unicorn']['preload_app']
@@ -75,7 +77,7 @@ template "/etc/nginx/sites-available/#{node['rails_app']['domain']}" do
     variables(
       :application_name => node['rails_app']['domain'],
       :application_path => node['rails_app']['application_path'],
-      :unicorn_port => node['unicorn']['port']
+      :unicorn_ports => node['unicorn']['ports']
     )
   end
 
