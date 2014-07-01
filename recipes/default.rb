@@ -9,20 +9,6 @@
 
 include_recipe "nginx"
 
-
-
-rvm_shell "bundle" do
-  ruby_string node['rails_app']['ruby_rvm_version']
-  user        node['rails_app']['name']
-  group       node['rails_app']['name']
-  cwd         "#{node['rails_app']['application_path']}/current"
-  #path        "home/rails_app/.rvm/gems/ruby-2.0.0-rc1@rails_app:/home/rails_app/.rvm/gems/ruby-2.0.0-rc1@global"
-  code        <<-EOF
-    bundle install #--path .bundle
-  EOF
-end
-
-
 #NOTE maybe not needed, add rvm bashrc config line
 rvm_line = '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"'
 ruby_block "add rvm basrhc config line" do
@@ -53,7 +39,7 @@ unicorn_config "/etc/unicorn/rails_app.rb" do
   pid node['rails_app']['unicorn_pid']
 end
 
-rvm_shell "start unicorn" do
+rvm_shell "run bundle install and start unicorn" do
   ruby_string node['rails_app']['ruby_rvm_version']
   user        node['rails_app']['name']
   group       node['rails_app']['name']
@@ -61,7 +47,7 @@ rvm_shell "start unicorn" do
   #path        "home/rails_app/.rvm/gems/ruby-2.0.0-rc1@rails_app:/home/rails_app/.rvm/gems/ruby-2.0.0-rc1@global"
   #NOTE add path to config file with unicorn pid
   code        <<-EOF
-    unicorn -D "/etc/#{node['rails_app']['name']}.rb"
+    bundle install && lnicorn -D "/etc/unicorn/#{node['rails_app']['name']}.rb"
   EOF
 end
 
