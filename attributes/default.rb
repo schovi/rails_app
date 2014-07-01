@@ -14,8 +14,9 @@ default['rails_app']['unicorn_pid'] = "/tmp/#{default['rails_app']['name']}.pid"
 default['unicorn']['config_file'] =  "/etc/unicorn/#{default['rails_app']['name']}.rb"
 default['unicorn']['worker_timeout'] = 60
 default['unicorn']['preload_app'] = false
+#beware right number of worker processes depends on ram
 default['unicorn']['worker_processes'] = [node['cpu']['total'].to_i * 4, 8].min
 default['unicorn']['preload_app'] = false
 default['unicorn']['before_fork'] = 'sleep 1'
-default['unicorn']['ports'] = ['8080', '8081', '8082']
+default['unicorn']['port'] = '8080'
 default['unicorn']['options'] = { :tcp_nodelay => true, :backlog => 100 }
