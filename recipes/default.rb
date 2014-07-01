@@ -47,7 +47,7 @@ rvm_shell "run bundle install and start unicorn" do
   #path        "home/rails_app/.rvm/gems/ruby-2.0.0-rc1@rails_app:/home/rails_app/.rvm/gems/ruby-2.0.0-rc1@global"
   #NOTE add path to config file with unicorn pid
   code        <<-EOF
-    bundle install && lnicorn -D "/etc/unicorn/#{node['rails_app']['name']}.rb"
+    bundle install && unicorn -D "/etc/unicorn/#{node['rails_app']['name']}.rb"
   EOF
 end
 
