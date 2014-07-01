@@ -65,13 +65,13 @@ end
 
 
 file "#{node['nginx']['dir']}/sites-available/#{node['rails_app']['domain']}" do
-  owner node['name']
+  owner node['rails_app']['name']
   mode  "0644"
 end
 
 template "/etc/nginx/sites-available/#{node['rails_app']['domain']}" do
     source "nginx_site.erb"
-    mode 644
+    mode "644"
     variables(
       :application_name => node['rails_app']['domain'],
       :application_path => node['rails_app']['application_path'],

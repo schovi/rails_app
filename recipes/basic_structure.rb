@@ -2,22 +2,15 @@ user_account node['rails_app']['name'] do
   action :create
 end
 
-package 'git' do
-  action :install
+#tmux :: Helps with debugging NOTE add tmux config with key set to C-A
+#libv8 :: Fix Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable) on Debian - starting rails app
+#libmysqlclient :: Install development headers for mysql required by mysql2 gem
+%w{git tmux libv8 libmysqlclient}.each do |pkg|
+  package pkg do
+    action :install
+  end
 end
 
-#it helps with debugging
-#NOTE add tmux config with key set to C-A
-package 'tmux' do
-  action :install
-end
-
-#Fix Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable) on Debian - starting rails app
-package 'libv8-dev' do
-  action :install
-end
-
-#Install development headers for mysql required by mysql2 gem
 package 'libmysqlclient-dev' do
   action :install
 end
