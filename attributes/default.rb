@@ -20,5 +20,5 @@ default['unicorn']['before_fork'] = 'sleep 1'
 default['unicorn']['port'] = '8080'
 default['unicorn']['options'] = { :tcp_nodelay => true, :backlog => 100 }
 default['unicorn']['pid'] = "/tmp/pids/#{default['rails_app']['name']}.pid"
-default['unicorn']['stderr_path'] = "#{default['rails_app']['application_path']/log/unicorn.stderr.log}"
-default['unicorn']['stdout_path'] = "#{default['rails_app']['application_path']/log/unicorn.stdout.log}"
+default['unicorn']['stderr_path'] = "#{default['rails_app']['application_path']}/current/log/unicorn.stderr.log"
+default['unicorn']['stdout_path'] = "#{default['rails_app']['application_path']}/current/log/unicorn.stdout.log"

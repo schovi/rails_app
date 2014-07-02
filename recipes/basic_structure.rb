@@ -12,6 +12,14 @@ end
   end
 end
 
+#create directory for pids
+directory "/tmp/pids" do
+  owner "root"
+  group "root"
+  mode 00777
+  action :create
+end
+
 application node['rails_app']['name'] do
   owner node['rails_app']['name']
   group node['rails_app']['name']
