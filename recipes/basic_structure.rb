@@ -2,7 +2,8 @@ user_account node['rails_app']['name'] do
   action :create
 end
 
-#tmux :: Helps with debugging NOTE add tmux config with key set to C-A
+#tmux :: Helps with debugging 
+#FIXME add tmux config with key set to C-A
 #libv8 :: Fix Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable) on Debian - starting rails app
 #libmysqlclient :: Install development headers for mysql required by mysql2 gem
 %w{git tmux libv8-dev libmysqlclient-dev}.each do |pkg|
@@ -18,7 +19,7 @@ application node['rails_app']['name'] do
   repository node['rails_app']['git_repository']
   revision 'master'
   rails do
-    #NOTE it should take attributes, not hardcoded strings
+    #FIXME it should take attributes, not hardcoded strings
     database do
       database 'rails_app'
       username 'rails_app'

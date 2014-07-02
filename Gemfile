@@ -6,6 +6,7 @@ gem 'chefspec'
 gem 'json', '1.8.1'
 gem 'strainer'
 gem 'foodcritic'
+gem 'rake-notes'
 
 # Uncomment these lines if you want to live on the Edge:
 #
