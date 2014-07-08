@@ -27,7 +27,7 @@ end
 #  end
 #end
 
-unicorn_config "/etc/unicorn/rails_app.rb" do
+unicorn_config node['unicorn']['config_file'] do
   listen({ node['unicorn']['port'] => node['unicorn']['options'] })
   working_directory "#{node['rails_app']['application_path']}/current"
   worker_timeout node['unicorn']['worker_timeout']
