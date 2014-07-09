@@ -29,9 +29,9 @@ application node['rails_app']['name'] do
   rails do
     #FIXME it should take attributes, not hardcoded strings
     database do
-      database 'rails_app'
-      username 'rails_app'
-      password '12*!asBUApg#'
+      database node['rails_app']['database']['database']
+      username node['rails_app']['database']['username']
+      password node['rails_app']['database']['password']
     end
   end
 end
