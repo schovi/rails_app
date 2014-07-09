@@ -46,7 +46,7 @@ rvm_shell "run bundle install" do
   cwd         "#{node['rails_app']['application_path']}/current"
   #path        "home/rails_app/.rvm/gems/ruby-2.0.0-rc1@rails_app:/home/rails_app/.rvm/gems/ruby-2.0.0-rc1@global"
   code        <<-EOF
-    bundle instal --without development test doc"
+    bundle instal --without development test doc
   EOF
 end
 
