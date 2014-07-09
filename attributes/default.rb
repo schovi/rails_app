@@ -3,10 +3,12 @@ default['rails_app']['name'] = 'rails_app'
 default['rails_app']['domain'] = 'rails_app.com'
 default['rails_app']['application_path'] =  "/home/#{default['rails_app']['name']}"
 default['rails_app']['git_repository'] = 'https://github.com/erich/simple-rails.git'
+default['rails_app']['git_revision'] = 'master'
 default['rails_app']['bashrc'] = "#{default['rails_app']['application_path']}/.bashrc"
 default['rails_app']['database_name'] = 'rails_app'
 default['rails_app']['database_password'] = 'rails_app'
 default['rails_app']['ruby_rvm_version'] = "ruby-2.0.0@#{default['rails_app']['name']}"
+
 
 
 #unicorn configuration, port, worker processes
