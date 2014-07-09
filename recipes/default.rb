@@ -39,17 +39,20 @@ unicorn_config node['unicorn']['config_file'] do
   stdout_path node['unicorn']['stdout_path']
 end
 
-rvm_shell "run bundle install and start unicorn" do
+rvm_shell "run bundle install" do
   ruby_string node['rails_app']['ruby_rvm_version']
   user        node['rails_app']['name']
   group       node['rails_app']['name']
   cwd         "#{node['rails_app']['application_path']}/current"
   #path        "home/rails_app/.rvm/gems/ruby-2.0.0-rc1@rails_app:/home/rails_app/.rvm/gems/ruby-2.0.0-rc1@global"
   code        <<-EOF
-    bundle install && unicorn -D "/etc/unicorn/#{node['rails_app']['name']}.rb"
+    bundle instal --without development test doc"
   EOF
 end
 
+# TODO move unicorn start to monit
+# start unicorn
+# unicorn -D "/etc/unicorn/#{node['rails_app']['name']}.rb
 
 file "#{node['nginx']['dir']}/sites-available/#{node['rails_app']['domain']}" do
   owner node['rails_app']['name']
