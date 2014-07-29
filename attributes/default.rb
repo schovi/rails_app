@@ -5,9 +5,9 @@ default['rails_app']['application_path'] =  "/home/#{default['rails_app']['name'
 default['rails_app']['git_repository'] = 'https://github.com/erich/simple-rails.git'
 default['rails_app']['git_revision'] = 'master'
 default['rails_app']['bashrc'] = "#{default['rails_app']['application_path']}/.bashrc"
-default['rails_app']['database']['database'] = 'rails_app'
-default['rails_app']['database']['username'] = 'rails_app'
-default['rails_app']['database']['password'] = 'rails_app'
+default['rails_app']['database'] = 'rails_app'
+default['rails_app']['database_username'] = 'rails_app'
+default['rails_app']['database_password'] = 'rails_app'
 
 default['rails_app']['ruby_rvm_version'] = "ruby-2.0.0@#{default['rails_app']['name']}"
 

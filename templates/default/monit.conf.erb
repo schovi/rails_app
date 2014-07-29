@@ -1,0 +1,7 @@
+check process <%= node.rails_app[:name] %> with pidfile <%= node.unicorn[:pid] %>
+  group <%= node.rails_app[:name] %>
+  start program = "/bin/su - <%= node.rails_app[:name] %> -c 'RAILS_ENV=production RACK_ENV=production cd /home/fofrslevy_rails_stage/current && unicorn -c /etc/unicorn/<%= node.rails_app['name'] %>.rb -D -E production'"
+  stop program  = "/bin/su - <%= node.rails_app[:name] %> -c 'test -s <%= node.unicorn[:pid] %> && kill `cat <%= node.unicorn[:pid] %>`'"
+  if changed pid then alert
+  if 2 restarts within 5 cycles then alert
+  if totalmem is greater than 500.0 MB for 3 cycles then restart
