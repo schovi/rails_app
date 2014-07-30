@@ -32,8 +32,6 @@ application node['rails_app']['name'] do
 
   create_dirs_before_symlink ["log", "tmp"]
 
-  keep_releases 10
-
   _database = node['rails_app']['database']
   _database_username = node['rails_app']['database_username']
   _database_password = node['rails_app']['database_password']
