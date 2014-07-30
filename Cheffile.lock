@@ -1,8 +1,0 @@
-SITE
-  remote: http://community.opscode.com/api/v1
-  specs:
-    user (0.3.0)
-
-DEPENDENCIES
-  user (>= 0)
-

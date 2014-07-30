@@ -1,4 +1,6 @@
 #name of the app, domain and path
+default['rails_app']['environment'] = 'production'
+
 default['rails_app']['name'] = 'rails_app'
 default['rails_app']['domain'] = 'rails_app.com'
 default['rails_app']['application_path'] =  "/home/#{default['rails_app']['name']}"

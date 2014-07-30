@@ -7,6 +7,9 @@
 #
 #
 
+# TODO do configu
+ENV['RACK_ENV'] = ENV['RAILS_ENV'] = node.rails_app['environment']
+
 include_recipe "nginx"
 
 #FIXME maybe not needed, add rvm bashrc config line
